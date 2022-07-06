@@ -32,14 +32,23 @@ def create_recipe_db(ingredient):
     recipe_list = get_recipes(API_KEY, API_HOST, ingredient)
 
     # Create a dataframe for the page posts
-    col_names = ["Title", "Prep-Time", "Cook-Time", "Total-Time", "Link"]
+    col_names = ["Title", "Prep-Time", "Cook-Time", "Total-Time", "Link", "Description", "Instructions"]
     munchies = pd.DataFrame(columns = col_names)
 
     for recipe in recipe_list:
         # Put the data from the post in the pandas dataframe
         #munchies.loc[len(munchies.index)] = [recipe["name"], "NULL", "NULL", "NULL", "NULL]"]
-        if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe and "total_time_minutes" in recipe and "video_url" in recipe:
-            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"],recipe["total_time_minutes"], recipe["video_url"]]
+        if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe and "total_time_minutes" in recipe and "video_url" in recipe and "description" in recipe and "instructions" in recipe:
+            
+            #Generate a string of instructions
+            count = 0
+            instruction_list = ""
+            for instr in recipe["instructions"]:
+                count += 1
+                instr_step = "\n" + "       " + str(count) + ". " + instr["display_text"]
+                instruction_list += instr_step
+            
+            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"],recipe["total_time_minutes"], recipe["video_url"], recipe["description"], instruction_list]
     
     # Create an engine object
     engine = db.create_engine('sqlite:///30_min_munchies.db')
@@ -59,6 +68,8 @@ def display_recipe_db(query_result, ingredient):
             print("Cook Time:", row[2], end="\n")
             print("Total Time:", row[3], end="\n")
             print("Video: ", row[4], end="\n")
+            print("Description:", row[5], end="\n")
+            print("Instructions:", row[6], end="\n")
             print()
     else:
         print("\nThere are no 30 minute recipes with", ingredient, ".\n")
