@@ -8,7 +8,6 @@ APP_KEY = "0b2df6d09ea0291280c42d49e6b0bd6f"
 
 #Prompts the user to enter a valid ingredient (strings only) and returns that ingredient
 def get_user_ingredient():
-<<<<<<< HEAD
     ingredient = input('What ingredient do you want to see 30-minute recipes for?: ')
     try:
         while float(ingredient):
@@ -16,33 +15,6 @@ def get_user_ingredient():
     except ValueError as e:
         pass
     return ingredient
-    
-#This should return a dictionary of recipes
-def get_recipes(app_id, app_key, ingredient):
-    edamam_object = Edamam(recipes_appid = app_id, recipes_appkey=app_key)
-    query_result = edamam_object.search_recipe(ingredient)
-    return query_result["hits"]
-
-def create_recipe_db():
-    recipe_list = get_recipes(APP_ID, APP_KEY, get_user_ingredient())
-
-    # Create a dataframe for the page posts
-    col_names = ["Title", "Time", "Link"]
-    munchies = pd.DataFrame(columns = col_names)
-
-    for recipe in recipe_list:
-        # Put the data from the post in the pandas dataframe
-        munchies.loc[len(munchies.index)] = [recipe["recipe"]["label"], recipe["recipe"]['totalTime'], recipe["recipe"]["url"]]
-    
-    # Create an engine object
-    engine = db.create_engine('sqlite:///30_min_munchies.db')
-
-=======
-    pass
-    #ingredient = input()
-    #Validate that this input is a string
-    #Loop until user inputs a string
-    #return ingredient
 
 #This should return a dictionary of recipes
 def get_recipes(app_id, app_key, ingredient):
