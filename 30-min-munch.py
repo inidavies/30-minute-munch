@@ -28,8 +28,8 @@ def get_recipes(app_key, app_host, ingredient):
     response = requests.get(url, headers=headers, params=querystring)
     return response.json()["results"]
 
-def create_recipe_db():
-    recipe_list = get_recipes(API_KEY, API_HOST, get_user_ingredient())
+def create_recipe_db(ingredient):
+    recipe_list = get_recipes(API_KEY, API_HOST, ingredient)
 
     # Create a dataframe for the page posts
     col_names = ["Title", "Prep-Time", "Cook-Time", "Total-Time", "Link"]
@@ -44,21 +44,24 @@ def create_recipe_db():
     # Create an engine object
     engine = db.create_engine('sqlite:///30_min_munchies.db')
 
->>>>>>> b7c154f2c79b3d730a941670eee796b41b3a9ae6
     # Create and send sql table from your dataframe
     munchies.to_sql('recipes', con=engine, if_exists='replace', index=False)
     
     #Return Database Query
     return engine.execute("SELECT * FROM recipes;").fetchall()
 
-def display_recipe_db():
-    print("Generating Database...")
-    # Create an engine object
-    engine = db.create_engine('sqlite:///30_min_munchies.db')
-
-    # Make a query and print out the database
-    query_result = engine.execute("SELECT * FROM recipes;").fetchall()
-    print(pd.DataFrame(query_result))
-
-create_recipe_db()
-display_recipe_db()
+def display_recipe_db(query_result, ingredient):
+    if query_result != []:
+        print("\nHere are your 30 minute", ingredient, " recipes...\n")
+        for row in query_result:
+            print("Recepie:", row[0], end="\n")
+            print("Prep Time:", row[1], end="\n")
+            print("Cook Time:", row[2], end="\n")
+            print("Total Time:", row[3], end="\n")
+            print("Video: ", row[4], end="\n")
+            print()
+    else:
+        print("\nThere are no 30 minute recipes with", ingredient, ".\n")
+        
+ingredient = get_user_ingredient()
+display_recipe_db(create_recipe_db(ingredient), ingredient)
