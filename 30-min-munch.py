@@ -64,9 +64,9 @@ def display_recipe_db(query_result, ingredient):
         print("\nHere are your 30 minute", ingredient, " recipes...\n")
         for row in query_result:
             print("Recepie:", row[0], end="\n")
-            print("Prep Time:", row[1], end="\n")
-            print("Cook Time:", row[2], end="\n")
-            print("Total Time:", row[3], end="\n")
+            print("Prep Time:", row[1], "minutes", end="\n")
+            print("Cook Time:", row[2], "minutes", end="\n")
+            print("Total Time:", row[3], "minutes", end="\n")
             print("Video: ", row[4], end="\n")
             print("Description:", row[5], end="\n")
             print("Instructions:", row[6], end="\n")
