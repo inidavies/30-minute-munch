@@ -4,10 +4,11 @@ import sqlalchemy as db
 
 API_KEY = "ceeb271bddmshe389392044c13efp170620jsn7cfdf68bc735"
 API_HOST = "tasty.p.rapidapi.com"
+ 
 
-''' Prompts the user to enter a valid ingredient (strings only)
- and returns that ingredient '''
 def get_user_ingredient():
+    ''' Prompts the user to enter a valid ingredient (strings only)
+     and returns that ingredient '''
     ingredient = input('What ingredient do you want to see 30-minute recipes for?: ')
     try:
         while float(ingredient):
@@ -17,8 +18,8 @@ def get_user_ingredient():
     return ingredient
 
 
-# This should return a dictionary of recipes
 def get_recipes(app_key, app_host, ingredient):
+    ''' This should return a dictionary of recipes '''
     url = "https://tasty.p.rapidapi.com/recipes/list"
 
     querystring = {"from":"0", "size":"100", "tags":"under_30_minutes", "q": ingredient}
@@ -32,9 +33,9 @@ def get_recipes(app_key, app_host, ingredient):
 
 
 def create_recipe_db(ingredient):
+    ''' Create a dataframe for the page posts '''
     recipe_list = get_recipes(API_KEY, API_HOST, ingredient)
 
-    # Create a dataframe for the page posts
     col_names = ["Title", "Prep-Time", "Cook-Time", "Total-Time", "Link", "Description", "Instructions"]
     munchies = pd.DataFrame(columns=col_names)
 
@@ -62,6 +63,7 @@ def create_recipe_db(ingredient):
 
 
 def display_recipe_db(query_result, ingredient):
+    ''' Display a the recipes and the info associated with it '''
     if query_result != []:
         print("\nHere are your 30 minute", ingredient, " recipes...\n")
         for row in query_result:
@@ -77,5 +79,6 @@ def display_recipe_db(query_result, ingredient):
         print("\nThere are no 30 minute recipes with", ingredient, ".\n")
         
 
+''' Main function calls '''
 ingredient = get_user_ingredient()
 display_recipe_db(create_recipe_db(ingredient), ingredient)
