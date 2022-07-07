@@ -21,7 +21,7 @@ def get_user_ingredient():
 def get_recipes(app_key, app_host, ingredient):
     url = "https://tasty.p.rapidapi.com/recipes/list"
 
-    querystring = {"from":"0","size":"100","tags":"under_30_minutes", "q": ingredient}
+    querystring = {"from":"0", "size":"100", "tags":"under_30_minutes", "q": ingredient}
 
     headers = {
         "X-RapidAPI-Key": app_key,
@@ -36,13 +36,12 @@ def create_recipe_db(ingredient):
 
     # Create a dataframe for the page posts
     col_names = ["Title", "Prep-Time", "Cook-Time", "Total-Time", "Link", "Description", "Instructions"]
-    munchies = pd.DataFrame(columns = col_names)
+    munchies = pd.DataFrame(columns=col_names)
 
     for recipe in recipe_list:
         # Put the data from the post in the pandas dataframe
         if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe and "total_time_minutes" in recipe and "video_url" in recipe and "description" in recipe and "instructions" in recipe:
-            
-            #Generate a string of instructions
+            # Generate a string of instructions
             count = 0
             instruction_list = ""
             for instr in recipe["instructions"]:
