@@ -13,7 +13,7 @@ def get_user_ingredient():
     print("Enter an ingredient and we will give you a list of recepies")
     print("All our recepies have take 30 minutes or less to make!")
     print("Let's get started!\n")
-    
+
     ingredient = input("Enter an ingredient: ")
     try:
         while float(ingredient):
