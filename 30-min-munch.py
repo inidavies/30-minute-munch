@@ -27,7 +27,8 @@ def get_recipes(app_key, app_host, ingredient):
     ''' This should return a dictionary of recipes '''
     url = "https://tasty.p.rapidapi.com/recipes/list"
 
-    querystring = {"from": "0", "size": "100", "tags": "under_30_minutes", "q": ingredient}
+    querystring = {"from": "0", "size": "100", 
+                  "tags": "under_30_minutes", "q": ingredient}
 
     headers = {
         "X-RapidAPI-Key": app_key,
