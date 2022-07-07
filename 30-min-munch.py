@@ -48,8 +48,9 @@ def create_recipe_db(ingredient):
 
     for recipe in recipe_list:
         # Put the data from the post in the pandas dataframe
-        if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe and "total_time_minutes" in recipe 
-            and "video_url" in recipe and "description" in recipe and "instructions" in recipe:
+        if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe 
+        and "total_time_minutes" in recipe and "video_url" in recipe 
+        and "description" in recipe and "instructions" in recipe:
             # Generate a string of instructions
             count = 0
             instruction_list = ""
