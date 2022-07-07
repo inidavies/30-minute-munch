@@ -61,7 +61,8 @@ def create_recipe_db(ingredient):
                 instr_step = "\n" + "       " + count_str + ". " + instr_text
                 instruction_list += instr_step
 
-            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"],
+            munchies.loc[len(munchies.index)] = [recipe["name"], 
+                                                 recipe["prep_time_minutes"],
                                                  recipe["cook_time_minutes"],
                                                  recipe["total_time_minutes"], recipe["video_url"],
                                                  recipe["description"], instruction_list]
