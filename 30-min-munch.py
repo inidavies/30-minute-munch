@@ -4,9 +4,9 @@ import sqlalchemy as db
 
 API_KEY = "ceeb271bddmshe389392044c13efp170620jsn7cfdf68bc735"
 API_HOST = "tasty.p.rapidapi.com"
- 
 
-def get_user_ingredient():
+
+def get_user_ingredient(): 
     ''' Prompts the user to enter a valid ingredient (strings only)
      and returns that ingredient '''
     ingredient = input('What ingredient do you want to see 30-minute recipes for?: ')

@@ -1,6 +1,7 @@
 import unittest
 from 3-min-munch import get_user_filter, get_recipes, create_recipe_db, display_recipe_db
 
+
 class Unit_test(unittest.TestCase):
     def test_get_user_ingredient(self):
         self.assertEqual(get_user_ingredient(), None)
