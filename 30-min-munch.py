@@ -82,7 +82,7 @@ def display_recipe_db(query_result, ingredient):
             print()
     else:
         print("\nThere are no 30 minute recipes with", ingredient, ".\n")
-        
+
 
 ''' Main function calls '''
 ingredient = get_user_ingredient()
