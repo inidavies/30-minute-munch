@@ -62,7 +62,7 @@ def create_recipe_db(ingredient):
 
     # Create and send sql table from your dataframe
     munchies.to_sql('recipes', con=engine, if_exists='replace', index=False)
-    
+
     # Return Database Query
     return engine.execute("SELECT * FROM recipes;").fetchall()
 
