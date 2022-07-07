@@ -17,7 +17,9 @@ def get_user_ingredient():
     ingredient = input("Enter an ingredient: ")
     try:
         while float(ingredient):
-            ingredient = input('Not a valid ingredient. Please try again: ')
+            print('Not a valid ingredient. Please try again: ')
+            ingredient = input("Enter an ingredient: ")
+
     except ValueError as e:
         pass
     return ingredient
@@ -71,26 +73,51 @@ def create_recipe_db(ingredient):
     engine = db.create_engine('sqlite:///30_min_munchies.db')
 
     # Create and send sql table from your dataframe
-    munchies.to_sql('recipes', con=engine, if_exists='replace', index=False)
+    munchies.to_sql(ingredient, con=engine, if_exists='replace', index=False)
 
     # Return Database Query
-    return engine.execute("SELECT * FROM recipes;").fetchall()
+    return engine.execute(f"SELECT * FROM {ingredient};").fetchall()
 
+def recipe_choice(index_list):
+    ''' Asks the user to choose a recipe from the list
+    for instruction display '''
+
+    print()
+    print("Which recipe would you like to try?")
+    choice = input("Choose a recipe index: ")
+    try:
+        while choice not in index_list:
+            print()
+            print('Not a valid index. Please try again: ')
+            choice = input("Choose a recipe index: ")
+    except ValueError as e:
+        pass
+    return int(choice)
 
 def display_recipe_db(query_result, ingredient):
     ''' Display a the recipes and the info associated with it '''
+    count = 0
     if query_result != []:
+        index_list = []
         print("\nHere are your 30 minute", ingredient, " recipes...\n")
         for row in query_result:
-            print("Recepie:", row[0], end="\n")
-            
-            '''print("Prep Time:", row[1], "minutes", end="\n")
-            print("Cook Time:", row[2], "minutes", end="\n")
-            print("Total Time:", row[3], "minutes", end="\n")
-            print("Video: ", row[4], end="\n")
-            print("Description:", row[5], end="\n")
-            print("Instructions:", row[6], end="\n")
-            print() '''
+            count += 1
+            index_list.append(str(count))
+            print(str(count), " ", row[0], "\nTotal Time:", row[3], "minutes")
+            print("\n")
+
+        choice = recipe_choice(index_list)
+        row = query_result[choice-1]
+        print()
+        print("Recipe:", row[0], end="\n")
+        print("Prep Time:", row[1], "minutes", end="\n")
+        print("Prep Time:", row[1], "minutes", end="\n")
+        print("Cook Time:", row[2], "minutes", end="\n")
+        print("Total Time:", row[3], "minutes", end="\n")
+        print("Video: ", row[4], end="\n")
+        print("Description:", row[5], end="\n")
+        print("Instructions:", row[6], end="\n")
+        print() 
     else:
         print("\nThere are no 30 minute recipes with", ingredient, ".\n")
 
