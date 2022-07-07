@@ -64,9 +64,10 @@ def create_recipe_db(ingredient):
             munchies.loc[len(munchies.index)] = [recipe["name"],
                                                  recipe["prep_time_minutes"],
                                                  recipe["cook_time_minutes"],
-                                                 recipe["total_time_minutes"], 
+                                                 recipe["total_time_minutes"],
                                                  recipe["video_url"],
-                                                 recipe["description"], instruction_list]
+                                                 recipe["description"],
+                                                 instruction_list]
 
     # Create an engine object
     engine = db.create_engine('sqlite:///30_min_munchies.db')
