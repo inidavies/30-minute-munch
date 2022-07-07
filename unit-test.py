@@ -9,13 +9,13 @@ class Unit_test(unittest.TestCase):
     # To be added once main code works
     '''def test_get_restrictions(self):
         self.assertEqual(get_restrictions(), None)'''
-    
+
     def test_get_recipes(self):
         self.assertEqual(get_recipes(), None)
-    
+
     def test_create_recipe_db(self):
         self.assertEqual(create_recipe_db(), None)
-    
+
     def test_display_recipe_db(self):
         self.assertEqual(display_recipe_db(), None)
 
