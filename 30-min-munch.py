@@ -49,7 +49,7 @@ def create_recipe_db(ingredient):
     for recipe in recipe_list:
         # Put the data from the post in the pandas dataframe
         if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe
-        and "total_time_minutes" in recipe and "video_url" in recipe 
+        and "total_time_minutes" in recipe and "video_url" in recipe
         and "description" in recipe and "instructions" in recipe:
             # Generate a string of instructions
             count = 0
@@ -57,11 +57,13 @@ def create_recipe_db(ingredient):
             for instr in recipe["instructions"]:
                 count += 1
                 instr_step = "\n" + "       " + str(count) 
-                             + ". " + instr["display_text"]
+                            + ". " + instr["display_text"]
                 instruction_list += instr_step
 
-            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"], 
-                                                 recipe["total_time_minutes"], recipe["video_url"], recipe["description"], instruction_list]
+            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"],
+                                                 recipe["cook_time_minutes"],
+                                                 recipe["total_time_minutes"], recipe["video_url"],
+                                                 recipe["description"], instruction_list]
 
     # Create an engine object
     engine = db.create_engine('sqlite:///30_min_munchies.db')
