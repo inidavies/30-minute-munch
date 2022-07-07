@@ -27,8 +27,8 @@ def get_recipes(app_key, app_host, ingredient):
     ''' This should return a dictionary of recipes '''
     url = "https://tasty.p.rapidapi.com/recipes/list"
 
-    querystring = {"from": "0", "size": "100", 
-                  "tags": "under_30_minutes", "q": ingredient}
+    querystring = {"from": "0", "size": "100",
+                   "tags": "under_30_minutes", "q": ingredient}
 
     headers = {
         "X-RapidAPI-Key": app_key,
@@ -42,7 +42,8 @@ def create_recipe_db(ingredient):
     ''' Create a dataframe for the page posts '''
     recipe_list = get_recipes(API_KEY, API_HOST, ingredient)
 
-    col_names = ["Title", "Prep-Time", "Cook-Time", "Total-Time", "Link", "Description", "Instructions"]
+    col_names = ["Title", "Prep-Time", "Cook-Time", 
+                 "Total-Time", "Link", "Description", "Instructions"]
     munchies = pd.DataFrame(columns=col_names)
 
     for recipe in recipe_list:
@@ -56,7 +57,8 @@ def create_recipe_db(ingredient):
                 instr_step = "\n" + "       " + str(count) + ". " + instr["display_text"]
                 instruction_list += instr_step
 
-            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"], recipe["total_time_minutes"], recipe["video_url"], recipe["description"], instruction_list]
+            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"], 
+                                                 recipe["total_time_minutes"], recipe["video_url"], recipe["description"], instruction_list]
 
     # Create an engine object
     engine = db.create_engine('sqlite:///30_min_munchies.db')
