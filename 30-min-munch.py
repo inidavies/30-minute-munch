@@ -63,7 +63,7 @@ def display_recipe_db(query_result, ingredient):
     if query_result != []:
         print("\nHere are your 30 minute", ingredient, " recipes...\n")
         for row in query_result:
-            print("Recepie:", row[0], end="\n")
+            print("Recipe:", row[0], end="\n")
             print("Prep Time:", row[1], "minutes", end="\n")
             print("Cook Time:", row[2], "minutes", end="\n")
             print("Total Time:", row[3], "minutes", end="\n")
