@@ -6,7 +6,7 @@ API_KEY = "ceeb271bddmshe389392044c13efp170620jsn7cfdf68bc735"
 API_HOST = "tasty.p.rapidapi.com"
 
 
-def get_user_ingredient(): 
+def get_user_ingredient():
     ''' Prompts the user to enter a valid ingredient (strings only)
      and returns that ingredient '''
     ingredient = input('What ingredient do you want to see 30-minute recipes for?: ')
@@ -22,7 +22,7 @@ def get_recipes(app_key, app_host, ingredient):
     ''' This should return a dictionary of recipes '''
     url = "https://tasty.p.rapidapi.com/recipes/list"
 
-    querystring = {"from":"0", "size":"100", "tags":"under_30_minutes", "q": ingredient}
+    querystring = {"from": "0", "size": "100", "tags": "under_30_minutes", "q": ingredient}
 
     headers = {
         "X-RapidAPI-Key": app_key,
@@ -49,7 +49,7 @@ def create_recipe_db(ingredient):
                 count += 1
                 instr_step = "\n" + "       " + str(count) + ". " + instr["display_text"]
                 instruction_list += instr_step
-            
+ 
             munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"],recipe["total_time_minutes"], recipe["video_url"], recipe["description"], instruction_list]
     
     # Create an engine object
