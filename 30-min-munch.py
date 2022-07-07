@@ -11,7 +11,7 @@ def get_user_ingredient():
      and returns that ingredient '''
     print("Welcome to 30 minute munch!")
     print("Enter an ingredient and we will give you a list of recepies")
-    print("All our recepies have take 30 minutes or less to make!")
+    print("All our recepies take 30 minutes or less to make!")
     print("Let's get started!\n")
 
     ingredient = input("Enter an ingredient: ")
@@ -71,6 +71,7 @@ def create_recipe_db(ingredient):
 
     # Create an engine object
     engine = db.create_engine('sqlite:///30_min_munchies.db')
+    #engine = db.create_engine('mysql://root:codio@localhost/30_min_munchies.db?charset=utf8', encoding='utf-8')
 
     # Create and send sql table from your dataframe
     munchies.to_sql(ingredient, con=engine, if_exists='replace', index=False)
