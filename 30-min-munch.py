@@ -112,7 +112,6 @@ def display_recipe_db(query_result, ingredient):
         print()
         print("Recipe:", row[0], end="\n")
         print("Prep Time:", row[1], "minutes", end="\n")
-        print("Prep Time:", row[1], "minutes", end="\n")
         print("Cook Time:", row[2], "minutes", end="\n")
         print("Total Time:", row[3], "minutes", end="\n")
         print("Video: ", row[4], end="\n")
