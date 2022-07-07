@@ -1,5 +1,5 @@
 import unittest
-from 3-min-munch import get_user_filter, get_recipes, 
+from 3-min-munch import get_user_filter, get_recipes,
 from 3-min-munch import create_recipe_db, display_recipe_db
 
 
