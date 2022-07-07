@@ -9,7 +9,12 @@ API_HOST = "tasty.p.rapidapi.com"
 def get_user_ingredient():
     ''' Prompts the user to enter a valid ingredient (strings only)
      and returns that ingredient '''
-    ingredient = input('What ingredient do you want to see 30-minute recipes for?: ')
+    print("Welcome to 30 minute munch!")
+    print("Enter an ingredient and we will give you a list of recepies")
+    print("All our recepies have take 30 minutes or less to make!")
+    print("Let's get started!\n")
+    
+    ingredient = input("Enter an ingredient: ")
     try:
         while float(ingredient):
             ingredient = input('Not a valid ingredient. Please try again: ')
@@ -49,8 +54,8 @@ def create_recipe_db(ingredient):
                 count += 1
                 instr_step = "\n" + "       " + str(count) + ". " + instr["display_text"]
                 instruction_list += instr_step
- 
-            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"],recipe["total_time_minutes"], recipe["video_url"], recipe["description"], instruction_list]
+
+            munchies.loc[len(munchies.index)] = [recipe["name"], recipe["prep_time_minutes"], recipe["cook_time_minutes"], recipe["total_time_minutes"], recipe["video_url"], recipe["description"], instruction_list]
     
     # Create an engine object
     engine = db.create_engine('sqlite:///30_min_munchies.db')
