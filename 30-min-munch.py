@@ -41,12 +41,12 @@ def create_recipe_db(ingredient):
     recipe_list = get_recipes(API_KEY, API_HOST, ingredient)
 
     col_names = ["Title", "Prep-Time", "Cook-Time",
-                 "Total-Time", "Link", "Description", "Instructions"]
+                 "Total-Time", "By", "Description", "Instructions"]
     munchies = pd.DataFrame(columns=col_names)
 
     for recipe in recipe_list:
         # Put the data from the post in the pandas dataframe
-        if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe and "total_time_minutes" in recipe and "video_url" in recipe and "description" in recipe and "instructions" in recipe:
+        if "prep_time_minutes" in recipe and "cook_time_minutes" in recipe and "total_time_minutes" in recipe and "credits" in recipe and "description" in recipe and "instructions" in recipe:
             # Generate a string of instructions
             count = 0
             instruction_list = ""
@@ -61,7 +61,7 @@ def create_recipe_db(ingredient):
                                                  recipe["prep_time_minutes"],
                                                  recipe["cook_time_minutes"],
                                                  recipe["total_time_minutes"],
-                                                 recipe["video_url"],
+                                                 recipe["credits"][0]["name"],
                                                  recipe["description"],
                                                  instruction_list]
 
@@ -112,7 +112,7 @@ def display_recipe_db(query_result, ingredient):
             print("Prep Time:", row[1], "minutes", end="\n")
             print("Cook Time:", row[2], "minutes", end="\n")
             print("Total Time:", row[3], "minutes", end="\n")
-            print("Video: ", row[4], end="\n")
+            print("By: ", row[4], end="\n")
             print("Description:", row[5], end="\n")
             print("Instructions:", row[6], end="\n")
             print()
