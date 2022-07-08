@@ -9,10 +9,6 @@ API_HOST = "tasty.p.rapidapi.com"
 def get_user_ingredient():
     ''' Prompts the user to enter a valid ingredient (strings only)
      and returns that ingredient '''
-    print("Welcome to 30 minute munch!")
-    print("Enter an ingredient and we will give you a list of recepies")
-    print("All our recepies take 30 minutes or less to make!")
-    print("Let's get started!\n")
 
     ingredient = input("Enter an ingredient: ")
     try:
@@ -123,5 +119,19 @@ def display_recipe_db(query_result, ingredient):
 
 
 ''' Main function calls '''
-ingredient = get_user_ingredient()
-display_recipe_db(create_recipe_db(ingredient), ingredient)
+print("Welcome to 30 minute munch!")
+print("Enter an ingredient and we will give you a list of recepies")
+print("All our recepies take 30 minutes or less to make!")
+print("Let's get started!\n")
+running = True
+while running:
+    
+    ingredient = get_user_ingredient()
+    display_recipe_db(create_recipe_db(ingredient), ingredient)
+
+    choice = input("Would you like to try another receipe? (y/n):")
+    if choice == "y" or choice == "Y":
+        pass
+    else:
+        print("Thanks for using 30 minute munch!")
+        running = False
