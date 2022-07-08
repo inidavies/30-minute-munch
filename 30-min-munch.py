@@ -93,27 +93,36 @@ def recipe_choice(index_list):
 
 def display_recipe_db(query_result, ingredient):
     ''' Display a the recipes and the info associated with it '''
-    count = 0
     if query_result != []:
-        index_list = []
-        print("\nHere are your 30 minute", ingredient, " recipes...\n")
-        for row in query_result:
-            count += 1
-            index_list.append(str(count))
-            print(str(count), " ", row[0], "\nTotal Time:", row[3], "minutes")
-            print("\n")
+        run_inner = True
+        while run_inner:
+            count = 0
+            index_list = []
+            print("\nHere are your 30 minute", ingredient, " recipes...\n")
+            for row in query_result:
+                count += 1
+                index_list.append(str(count))
+                print(str(count), " ", row[0], "\nTotal Time:", row[3], "minutes")
+                print("\n")
 
-        choice = recipe_choice(index_list)
-        row = query_result[choice-1]
-        print()
-        print("Recipe:", row[0], end="\n")
-        print("Prep Time:", row[1], "minutes", end="\n")
-        print("Cook Time:", row[2], "minutes", end="\n")
-        print("Total Time:", row[3], "minutes", end="\n")
-        print("Video: ", row[4], end="\n")
-        print("Description:", row[5], end="\n")
-        print("Instructions:", row[6], end="\n")
-        print() 
+            choice = recipe_choice(index_list)
+            row = query_result[choice-1]
+            print()
+            print("Recipe:", row[0], end="\n")
+            print("Prep Time:", row[1], "minutes", end="\n")
+            print("Cook Time:", row[2], "minutes", end="\n")
+            print("Total Time:", row[3], "minutes", end="\n")
+            print("Video: ", row[4], end="\n")
+            print("Description:", row[5], end="\n")
+            print("Instructions:", row[6], end="\n")
+            print()
+
+            choice = input("Would you like to try another recipe? (y/n):")
+            if choice == "y" or choice == "Y":
+                pass
+            else:
+                run_inner = False
+        
     else:
         print("\nThere are no 30 minute recipes with", ingredient, ".\n")
 
@@ -129,7 +138,7 @@ while running:
     ingredient = get_user_ingredient()
     display_recipe_db(create_recipe_db(ingredient), ingredient)
 
-    choice = input("Would you like to try another receipe? (y/n):")
+    choice = input("Would you like to try another ingredient? (y/n):")
     if choice == "y" or choice == "Y":
         pass
     else:
